@@ -1,0 +1,20 @@
+
+Mi Parqueo
+
+Necesita que se desarrolle el panel de control para los parqueos.
+Que pueda entrar y ver todas las reservas que él tenga. 
+Panel principal ver lo que tiene activo/ reservas activas.
+Reasignación de puesto del parqueo con las mismas características.
+Poder emitir un nuevo código QR nuevo para la reserva modificada.
+Puede haber cancelación de reservas. También debe notificarse al cliente que la misma fue cancelada. 
+Posibilidad de devolver el dinero del cliente. El mismo aparece luego de una cancelación.
+
+Historial de reservas del cliente en la panel de control mensual. Ver si se puede filtrar por últimos 7 días y estados. Se prensenta la cantidad de reservas en el gráficos.
+
+Solo se pueden hacer reservas en el día. Si pasan de las 24 hs se cancelan las reservas activas - relacionadas al pago, lo hace payphone.
+
+Ingresa con usuario.
+Administrador - Crea usuario de parqueo. Al que le puede asociar los parqueos.
+Parqueo - Usuarios creados por el administrador.
+
+Perfil con opciones de modificar datos personales y ciertos datos del parqueo que tienen.
