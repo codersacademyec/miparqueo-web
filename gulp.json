@@ -1,0 +1,22 @@
+{
+    "secciones": [
+        "index"
+    ],
+    "core": [
+    	"main",
+    	"app",
+    	"servicios/globalService"
+    ],
+    "libs": [
+    	"jquery/dist/jquery.min",
+        "tether/dist/js/tether.min",
+        "ripples.min",
+        "Chart.bundle.min",
+        "bootstrap/dist/js/bootstrap.min",
+        "bootstrap-material-design/material.min",
+        "angular/angular.min",
+        "angular-ui-router/release/angular-ui-router.min",
+        "angular-chart.min",
+        "easypiechart.min"
+    ]
+}

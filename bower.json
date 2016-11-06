@@ -1,0 +1,25 @@
+{
+  "name": "MiParking-web",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "gunsha <gonzaller@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gunsha/miparqueo-web",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dev/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "jquery": "1.11.0",
+    "bootstrap-material-design": "^4.0.2",
+    "angular-ui-router": "0.3.1",
+    "bootstrap": "^3.3.7"
+  }
+}
