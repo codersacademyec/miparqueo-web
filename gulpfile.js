@@ -58,12 +58,10 @@ gulp.task('core',function(){
   minifyJs(srcList,'app');
 });
 gulp.task('watch', function () {
-    watch('dev/js/*.js', batch(function (events, done) {
+    watch(['dev/js/secciones/*.js','dev/js/servicios/*.js','dev/js/controller/*.js','dev/js/*.js'], batch(function (events, done) {
         gulp.start('core', done);
     }));
-    watch(['dev/js/secciones/*.js','dev/js/servicios/*.js','dev/js/controller/*.js'], batch(function (events, done) {
-        gulp.start('secciones', done);
-    }));
+    
 });
 
 function minifyJs(srcList,filename){

@@ -1,5 +1,4 @@
 angular.module('MiParking', ['ui.router', 'chart.js', 'easypiechart'])
-  .constant("socialProvider", ["facebook", "google"])
     .factory('AccountService', ["$q", function($q) {
         return {
             currentUser: function() {
@@ -31,7 +30,7 @@ angular.module('MiParking', ['ui.router', 'chart.js', 'easypiechart'])
           },
           'contentView': {
             templateUrl: 'templates/index.html',
-            controller: 'indexCtrl'
+            controller: 'indexCtrl as ctrl'
           }
         }
       });

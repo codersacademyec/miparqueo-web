@@ -1,14 +1,17 @@
-angular.module('MiParking').controller('indexCtrl',['$scope','indexService','socialProvider', 'AccountService', indexCtrl]);
+angular.module('MiParking').controller('indexCtrl',['$scope','indexService', 'AccountService', indexCtrl]);
 
-function indexCtrl($scope, indexService, socialProvider, AccountService){
+function indexCtrl($scope, indexService, AccountService){
 
 	var vm = this;
 
 	$.material.init();
 
   $scope.credenciales = {};
+  vm.reservas = [];
 
-  $scope.percent = 65;
+  $scope.percentRes = 65;
+  $scope.percentDis = 35;
+
   $scope.options = {
     animate:{duration:1000,
       enabled:true}, barColor:'RED', scaleColor: '#e8eff0', lineWidth:10, size:150, lineCap:'butt' 
@@ -16,8 +19,11 @@ function indexCtrl($scope, indexService, socialProvider, AccountService){
 
   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   $scope.series = ['Series A'];
-
   $scope.data = [[65, 59, 80, 81, 56, 55, 40]];
+
+  $scope.labelMensual = ["1","2","3","4","5","6","7","8"];
+  $scope.serieMensual = ['Noviembre'];
+  $scope.dataMensual = [[89,70,65,70,50,65,58,60]];
 
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
@@ -52,19 +58,23 @@ function indexCtrl($scope, indexService, socialProvider, AccountService){
                   console.log(err);
               });
       }else{
-          console.error('No hay usuario logueado');
+          console.log('No hay usuario logueado');
           $('#login-dialog').modal();
       }
   });
 
   // login con Stamplay
   vm.login = function() {
-      indexService.login(credenciales);
+      indexService.login(vm.credenciales);
   };
 
   // obtiene todas las reserva del dia para el usuario logueado
   vm.buscarReservasDia = function(){
-    indexService.buscarPorDia($scope.user);
+    indexService.buscarPorDia($scope.user).then(function(data) {
+      vm.reservas = data;
+      $scope.$digest();
+      console.log(data);
+    });
   }
 
 }

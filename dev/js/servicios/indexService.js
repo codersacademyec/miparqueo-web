@@ -1,6 +1,6 @@
-angular.module('MiParking').factory('indexService', [indexService]);
+angular.module('MiParking').factory('indexService', ['$rootScope',indexService]);
 
-function indexService() {
+function indexService(r) {
     var service = {
         buscarPorDia: getResPorDia,
         login: login
@@ -10,19 +10,28 @@ function indexService() {
 
     // login con Stamplay
     function login(i){
-        Stamplay.User.socialLogin(socialProvider[i]);    
+        Stamplay.User.login(i)
+        .then(function(res) {
+          r.user = res;
+          $('#login-dialog').modal('hide');
+          return getResPorDia(res);
+        }, function(err) {
+          console.log(err);
+        })
     }
 
     // todas las reservas del dia
     function getResPorDia(user){
         if(user){
-    		var data = {usuario: user, periodoDesde: new Date()};
-    		Stamplay.Object("reservas").get(data)
-	        .then(function(res) {
-	          // success
-	        }, function(err) {
-	            console.log(err);
-	        }) 
+    		var data = {usuario: user};
+    		
+            var codeblock = new Stamplay.Codeblock("consultarreservas");
+            return codeblock.run(data).then(function (response) {
+                return response;
+            }, function( err ){
+              console.error(err);
+                return null;
+            });
         }else{
         	$('#login-dialog').modal();
         }
