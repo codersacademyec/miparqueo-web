@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html ng-app="MiParqueo">
+<html ng-app="MiParking">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MiParqueo</title>
-	<script type="text/javascript" src="js/Chart.bundle.min.js"></script>
-	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/angular-chart.min.js"></script>
-	<script type="text/javascript" src="js/easypiechart.min.js"></script>
-	<script type="text/javascript" src="js/angular-animate.min.js"></script>
-	<script type="text/javascript" src="js/angular-aria.min.js"></script>
-	<script type="text/javascript" src="js/angular-material.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/angular-material.min.css">
+	<title>MiParking</title>
+	<script type="text/javascript" src="js/lib.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+  <script src="https://drrjhlchpvi7e.cloudfront.net/libs/stamplay-js-sdk/2.0.5/stamplay.min.js"></script>
+    <script>
+      Stamplay.init("miparqueo", {
+        isMobile: false,
+        absoluteUrl : true,
+        autorefreshSocialLogin : true
+      });
+    </script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="async"></script>
 	<style>
 .chart {
   position: relative;
@@ -43,53 +46,5 @@
 <div ui-view="loginView"></div>
 <div ui-view="navView"></div>
 <div ui-view="contentView" class="container"></div>
-	
-<script>
-	var app = angular.module('MiParqueo', ['ui.router', 'chart.js', 'easypiechart', 'ngMaterial']);
-	app.controller('chartCtrl', ['$scope', function ($scope) {
-		$scope.percent = 65;
-		$scope.options = {
-			animate:{duration:1000,
-				enabled:true}, barColor:'RED', scaleColor:true,scaleColor: '#e8eff0', lineWidth:10, size:150, lineCap:'butt' 
-			};
-			 $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  $scope.series = ['Series A'];
-  $scope.data = [[65, 59, 80, 81, 56, 55, 40]];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
-  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
-  $scope.optionsLine = {
-  	responsive: true,
-    scales: {
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          display: true,
-          position: 'left'
-        }
-      ]
-    }
-  };
-		}]).config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise("/");
-  $stateProvider
-  .state('home', {
-  	url: '/',
-  	sticky: true,
-  	dsr: true,
-  	views: {
-  		'navView': {
-  			templateUrl: 'templates/nav.html'
-  		},
-  		'contentView': {
-  			templateUrl: 'templates/index.html',
-  			controller: 'chartCtrl'
-  		}
-  	}
-  });
-});
-</script>
 </body>
 </html>
