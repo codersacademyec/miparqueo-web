@@ -26,7 +26,8 @@ angular.module('MiParking', ['ui.router', 'chart.js', 'easypiechart'])
         dsr: true,
         views: {
           'navView': {
-            templateUrl: 'templates/nav.html'
+            templateUrl: 'templates/nav.html',
+            controller: 'navCtrl as ctrl'
           },
           'contentView': {
             templateUrl: 'templates/index.html',

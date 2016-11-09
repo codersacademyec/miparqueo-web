@@ -18,12 +18,8 @@ function indexCtrl($scope, indexService, AccountService){
     };
 
   $scope.labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-  $scope.series = ['Series A'];
+  $scope.series = ['Reservas'];
   $scope.data = [];
-
-  $scope.labelMensual = ["1","2","3","4","5","6","7","8"];
-  $scope.serieMensual = ['Mes'];
-  $scope.dataMensual = [[89,70,65,70,50,65,58,60]];
 
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
