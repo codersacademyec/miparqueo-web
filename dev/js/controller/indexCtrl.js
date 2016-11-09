@@ -71,10 +71,17 @@ function indexCtrl($scope, indexService, AccountService){
   // obtiene todas las reserva del dia para el usuario logueado
   vm.buscarReservasDia = function(){
     indexService.buscarPorDia($scope.user).then(function(data) {
+      console.log(data);
       vm.reservas = data;
       $scope.$digest();
-      console.log(data);
     });
+  }
+
+
+  s.estadia = function(i) {
+      var desde = new Date(i.HoraDesde);
+      var hasta = new Date(i.HoraHasta);
+      return desde.getHours() + ':' + (desde.getMinutes() == 0 ? '00' : '30') + ' - ' + hasta.getHours() + ':' + (hasta.getMinutes() == 0 ? '00' : '30') + '  |  ' + desde.getDate() + '/' + desde.getMonth() + '/' + desde.getFullYear();
   }
 
 }

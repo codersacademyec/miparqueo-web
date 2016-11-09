@@ -34,7 +34,6 @@
 </head>
 <body>
 
-
     <div class="global-wrap">
 
 		<div class="row">
@@ -79,28 +78,28 @@
 				</div>
 			</div>	
 		</div>
-		<div class="row row-wrap">
-            <a class="col-md-4" href="#" ng-repeat="reserva in ctrl.reservas">
-                <div>
-                    <h5>{{reserva.puestoParqueo}}</h5>
-                    <h4>{{reserva.Placa}}</h4>
-                       <ul>
-                            <li><span>$ {{reserva.Monto}}</span>
-                            </li>
-                            <li><span>$ {{reserva.HoraDesde}}</span>
-                            </li>
-                            <li><span>{{reserva.HoraHasta}}</span>
-                            </li>
-                        </ul>
-                    <div>
-	                    <p>
-	                        <form>
-	                            <!--button ng-click="ctrl.cancelar(reserva)" class="btn btn-primary">Cancelar</button-->
-	                        </form>
-	                    </p>
-                    </div>
-                </div>
-            </a>                       
+		<div class="row col-lg-12">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr class="active"><h2>Reservas</h2></tr>
+			  		<tr class="success">
+					    <th>Puesto</th>
+					    <th>Placa</th>
+					    <th>Hora Desde</th>
+					    <th>Hora Hasta</th>
+					    <th>Precio</th>
+				  	</tr>
+			  	</thead>
+			  	<tbody>
+			  		<tr ng-repeat="reserva in ctrl.reservas | orderBy : 'HoraDesde'" class="info" >
+			  			<td><span>{{reserva.puestoParqueo | uppercase }}</span></td>
+			  			<td><span>{{reserva.Placa | uppercase }}</span></td>
+			  			<td><span>$ {{reserva.Monto}}</span></td>
+			  			<td><span>{{ctrl.estadia(reserva.HoraDesde)}}</span></td>
+			  			<td><span>{{ctrl.estadia(reserva.HoraHasta)}}</span></td>
+			  		</tr>
+			  	</tbody>
+			</table>                
        </div>
 
 		<!-- LOGIN REGISTER LINKS CONTENT -->
