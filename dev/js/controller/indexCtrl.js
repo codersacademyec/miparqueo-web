@@ -78,10 +78,9 @@ function indexCtrl($scope, indexService, AccountService){
   }
 
 
-  s.estadia = function(i) {
-      var desde = new Date(i.HoraDesde);
-      var hasta = new Date(i.HoraHasta);
-      return desde.getHours() + ':' + (desde.getMinutes() == 0 ? '00' : '30') + ' - ' + hasta.getHours() + ':' + (hasta.getMinutes() == 0 ? '00' : '30') + '  |  ' + desde.getDate() + '/' + desde.getMonth() + '/' + desde.getFullYear();
+  vm.estadia = function(i) {
+      var fecha = new Date(i);
+      return fecha.getDate() + '/' + fecha.getMonth() + '/' + fecha.getFullYear() + " - " + fecha.getHours() + ':' + (fecha.getMinutes() == 0 ? '00' : '30');
   }
 
 }
