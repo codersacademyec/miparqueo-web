@@ -17,12 +17,12 @@ function indexCtrl($scope, indexService, AccountService){
       enabled:true}, barColor:'RED', scaleColor: '#e8eff0', lineWidth:10, size:150, lineCap:'butt' 
     };
 
-  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  $scope.labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
   $scope.series = ['Series A'];
-  $scope.data = [[65, 59, 80, 81, 56, 55, 40]];
+  $scope.data = [];
 
   $scope.labelMensual = ["1","2","3","4","5","6","7","8"];
-  $scope.serieMensual = ['Noviembre'];
+  $scope.serieMensual = ['Mes'];
   $scope.dataMensual = [[89,70,65,70,50,65,58,60]];
 
   $scope.onClick = function (points, evt) {
@@ -54,6 +54,7 @@ function indexCtrl($scope, indexService, AccountService){
               .then(function(res) {
                   $scope.user.perfil = res.data[0];
                   vm.buscarReservasDia();
+                  vm.estadisticasAnual();
               }, function(err) {
                   console.log(err);
               });
@@ -74,6 +75,16 @@ function indexCtrl($scope, indexService, AccountService){
       console.log(data);
       vm.reservas = data;
       $scope.$digest();
+    });
+  }
+
+  // busca estadísticas del año actual
+  vm.estadisticasAnual = function(){
+    var codeblock = new Stamplay.Codeblock("reservasanual");
+    codeblock.run({}).then(function (response) {
+        $scope.data=[response];
+    }, function( err ){
+      console.error(err);
     });
   }
 
