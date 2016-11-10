@@ -18,6 +18,7 @@
         "angular/angular.min",
         "angular-ui-router/release/angular-ui-router.min",
         "angular-chart.min",
-        "easypiechart.min"
+        "easypiechart.min",
+        "bootstrap-material-datetimepicker"
     ]
 }
