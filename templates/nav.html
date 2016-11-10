@@ -14,7 +14,7 @@
           <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Administrar
             <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#" ng-click="ctrl.buscarDisponibilidad()">Buscar Disponibilidad</a></li>
+            <li><a href="#" ng-click="ctrl.showDisponibilidad()">Buscar Disponibilidad</a></li>
             <!--li class="divider"></li>
             <li><a href="javascript:void(0)">Separated link</a></li-->
           </ul>
@@ -22,21 +22,25 @@
       </ul>
       
 
-      <div id="login-dialog" class="modal fade clearfix">
+      <div id="busqueda-dialog" class="modal fade clearfix">
         <div class="modal-content mfp-dialog">
         <h3>Buscar Disponibilidad</h3>
         <form class="dialog-form">
             <div class="form-group">
                 <label>Hora Desde</label>
-                <input type="text" class="form-control" ng-model="ctrl.filter.hD">
+                <input type="text" ng-model="ctrl.filter.hD" id="hD">
             </div>
             <div class="form-group">
                 <label>Hora Hasta</label>
-                <input type="text" class="form-control" ng-model="ctrl.filter.hH">
+                <input type="text" ng-model="ctrl.filter.hH" id="hH">
             </div>
-            <div class="checkbox">
+            <div class="form-group">
                 <label>Tipo Vehiculo</label>
-                <input type="text" class="form-control" ng-model="ctrl.filter.tV">
+                <select class="form-control" ng-model="ctrl.filter.tV" >
+                  <option value="l">Liviano</option>
+                  <option value="p">Pesado</option>
+                  <option value="m">Moto</option>
+                </select>
             </div>
             <div class="form-group">
                 <button ng-click="ctrl.buscarDisponibilidad()" class="btn btn-success">Buscar</button>

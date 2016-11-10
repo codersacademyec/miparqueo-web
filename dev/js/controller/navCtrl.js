@@ -1,4 +1,4 @@
-angular.module('MiParking').controller('navCtrl',['$scope','navService', navCtrl]);
+angular.module('MiParking').controller('navCtrl', ['$scope', 'navService', navCtrl]);
 
 function navCtrl($scope, navService){
 
@@ -6,20 +6,22 @@ function navCtrl($scope, navService){
 
     $.material.init();
 
-    vm.filter = [];
+    vm.filter = {};
     vm.resultBusq = [];
 
     vm.showDisponibilidad = function () {
+      $('#hD').bootstrapMaterialDatePicker({ date: true });
+      $('#hH').bootstrapMaterialDatePicker({ date: true });
       $('#busqueda-dialog').modal();
     }
 
     vm.buscarDisponibilidad = function () {
-      console.log(data);
-      navService.buscarDisponibilidad(filter).then(function(data) {
+
+      navService.buscarDisponibilidad(vm.filter).then(function(data) {
         console.log(data);
         vm.resultBusq = data;
+        $('#busqueda-dialog').modal('hide');
         $scope.$digest();
       });
     }
-
 }

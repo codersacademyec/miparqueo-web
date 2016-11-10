@@ -1,6 +1,6 @@
 angular.module('MiParking').factory('navService', ['$rootScope',navService]);
 
-function navService(navService) {
+function navService(root) {
     var service = {
         buscarDisponibilidad: buscarDisponibilidad
     };

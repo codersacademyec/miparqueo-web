@@ -1,4 +1,4 @@
-angular.module('MiParking').controller('indexCtrl',['$scope','indexService', 'AccountService', indexCtrl]);
+angular.module('MiParking').controller('indexCtrl',['$scope', 'indexService', 'AccountService', indexCtrl]);
 
 function indexCtrl($scope, indexService, AccountService){
 

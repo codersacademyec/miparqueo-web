@@ -1,6 +1,7 @@
 {
     "secciones": [
-        "index"
+        "index",
+        "nav"
     ],
     "core": [
     	"main",
