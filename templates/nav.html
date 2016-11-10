@@ -10,19 +10,40 @@
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="javascript:void(0)">Link</a></li>
         <li class="dropdown">
-          <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+          <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Administrar
             <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="javascript:void(0)">Action</a></li>
-            <li><a href="javascript:void(0)">Another action</a></li>
-            <li><a href="javascript:void(0)">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="javascript:void(0)">Separated link</a></li>
+            <li><a href="#" ng-click="ctrl.buscarDisponibilidad()">Buscar Disponibilidad</a></li>
+            <!--li class="divider"></li>
+            <li><a href="javascript:void(0)">Separated link</a></li-->
           </ul>
         </li>
       </ul>
+      
+
+      <div id="login-dialog" class="modal fade clearfix">
+        <div class="modal-content mfp-dialog">
+        <h3>Buscar Disponibilidad</h3>
+        <form class="dialog-form">
+            <div class="form-group">
+                <label>Hora Desde</label>
+                <input type="text" class="form-control" ng-model="ctrl.filter.hD">
+            </div>
+            <div class="form-group">
+                <label>Hora Hasta</label>
+                <input type="text" class="form-control" ng-model="ctrl.filter.hH">
+            </div>
+            <div class="checkbox">
+                <label>Tipo Vehiculo</label>
+                <input type="text" class="form-control" ng-model="ctrl.filter.tV">
+            </div>
+            <div class="form-group">
+                <button ng-click="ctrl.buscarDisponibilidad()" class="btn btn-success">Buscar</button>
+            </div>
+        </form>
+        </div>
     </div>
+
   </div>
 </div>

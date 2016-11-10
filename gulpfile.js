@@ -52,18 +52,16 @@ gulp.task('core',function(){
   }
   var sec = prop.secciones;
   for (var i = 0; i < sec.length; i++) {
-    srcList.push('./dev/js/service/'+sec[i]+'Service.js');
+    srcList.push('./dev/js/servicios/'+sec[i]+'Service.js');
     srcList.push('./dev/js/controller/'+sec[i]+'Ctrl.js');
   }
   minifyJs(srcList,'app');
 });
 gulp.task('watch', function () {
-    watch('dev/js/*.js', batch(function (events, done) {
+    watch(['dev/js/secciones/*.js','dev/js/servicios/*.js','dev/js/controller/*.js','dev/js/*.js'], batch(function (events, done) {
         gulp.start('core', done);
     }));
-    watch(['dev/js/secciones/*.js','dev/js/service/*.js','dev/js/controller/*.js'], batch(function (events, done) {
-        gulp.start('secciones', done);
-    }));
+    
 });
 
 function minifyJs(srcList,filename){
