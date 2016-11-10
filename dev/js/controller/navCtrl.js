@@ -13,23 +13,6 @@ function navCtrl($scope, navService){
       $('#busqueda-dialog').modal();
     }
 
-    // busca si hay usuario logueado
-    AccountService.currentUser()
-    .then(function(user) {
-        if (user || $scope.user) {
-            $scope.user = user ? user : $scope.user;
-            Stamplay.Object("usuarios").get({owner: $scope.user._id})
-                .then(function(res) {
-                    $scope.user.perfil = res.data[0];
-                }, function(err) {
-                    console.log(err);
-                });
-        }else{
-            console.log('No hay usuario logueado');
-            $('#login-dialog').modal();
-        }
-    });
-
     vm.buscarDisponibilidad = function () {
       navService.getParqueoUsuario($scope.user).then(function(res) {
         vm.filter.pId = res.parqueo;
