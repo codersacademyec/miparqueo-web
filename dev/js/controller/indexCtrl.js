@@ -1,6 +1,6 @@
-angular.module('MiParking').controller('indexCtrl',['$scope', 'indexService', 'AccountService', indexCtrl]);
+angular.module('MiParking').controller('indexCtrl',['$scope', '$rootScope', 'indexService', 'AccountService', indexCtrl]);
 
-function indexCtrl($scope, indexService, AccountService){
+function indexCtrl($scope, $rootScope, indexService, AccountService){
 
 	var vm = this;
 
@@ -44,11 +44,11 @@ function indexCtrl($scope, indexService, AccountService){
   // busca si hay usuario logueado
   AccountService.currentUser()
   .then(function(user) {
-      if (user || $scope.user) {
-          $scope.user = user ? user : $scope.user;
-          Stamplay.Object("usuarios").get({owner: $scope.user._id})
+      if (user || $rootScope.user) {
+          $rootScope.user = user ? user : $rootScope.user;
+          Stamplay.Object("usuarios").get({owner: $rootScope.user._id})
               .then(function(res) {
-                  $scope.user.perfil = res.data[0];
+                  $rootScope.user.perfil = res.data[0];
                   vm.buscarReservasDia();
                   vm.estadisticasAnual();
               }, function(err) {
@@ -67,12 +67,12 @@ function indexCtrl($scope, indexService, AccountService){
 
   // obtiene todas las reserva del dia para el usuario logueado
   vm.buscarReservasDia = function(){
-    indexService.buscarPorDia($scope.user).then(function(data) {
+    indexService.buscarPorDia($rootScope.user).then(function(data) {
       console.log(data);
       vm.reservas = data;
       $scope.$digest();
     });
-  }
+  };
 
   // busca estadísticas del año actual
   vm.estadisticasAnual = function(){
@@ -82,13 +82,13 @@ function indexCtrl($scope, indexService, AccountService){
     }, function( err ){
       console.error(err);
     });
-  }
+  };
 
 
   vm.estadia = function(i) {
       var fecha = new Date(i);
       return fecha.getDate() + '/' + fecha.getMonth() + '/' + fecha.getFullYear() + " - " + fecha.getHours() + ':' + (fecha.getMinutes() == 0 ? '00' : '30');
-  }
+  };
 
   $('.hora').bootstrapMaterialDatePicker({format : 'DD/MM/YYYY HH:mm', date: false});
 }

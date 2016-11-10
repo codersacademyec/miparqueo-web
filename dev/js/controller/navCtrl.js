@@ -1,6 +1,6 @@
-angular.module('MiParking').controller('navCtrl', ['$scope', 'navService', 'AccountService', navCtrl]);
+angular.module('MiParking').controller('navCtrl', ['$scope','$rootScope' , 'navService', 'AccountService', navCtrl]);
 
-function navCtrl($scope, navService){
+function navCtrl($scope, $rootScope, navService){
 
     var vm = this;
 
@@ -11,10 +11,10 @@ function navCtrl($scope, navService){
 
     vm.showDisponibilidad = function () {
       $('#busqueda-dialog').modal();
-    }
+    };
 
     vm.buscarDisponibilidad = function () {
-      navService.getParqueoUsuario($scope.user).then(function(res) {
+      returnnavService.getParqueoUsuario($rootScope.user).then(function(res) {
         vm.filter.pId = res.parqueo;
         vm.filter.hD =  new Date(vm.filter.hD);
         vm.filter.hH =  new Date(vm.filter.hH);
@@ -25,6 +25,5 @@ function navCtrl($scope, navService){
           $scope.$digest();
         });
       });
-    }
-
+    };
 }
