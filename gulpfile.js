@@ -29,6 +29,7 @@ gulp.task('css',function(){
     '.dev/js/lib/ripples.min.css',
     '.dev/js/lib/bootstrap/dist/bootstrap.min.css',
     '.dev/js/lib/bootstrap-material-design/dist/bootstrap-material-design.min.css',
+    '.dev/js/lib/bootstrap-material-datetimepicker',
     './dev/css/main.css',
     './dev/css/app.css'])
   .pipe(concat('app.css'))
