@@ -5,6 +5,7 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
 	var vm = this;
 
 	$.material.init();
+  $('#search').collapse("show");
 
   $scope.credenciales = {};
   vm.reservas = [];

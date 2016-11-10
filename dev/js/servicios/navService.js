@@ -19,7 +19,7 @@ function navService(root) {
     }
 
     function getParqueoUsuario(user){
-        return Stamplay.Object("usuarioparqueo").get(user.id)
+        return Stamplay.Object("usuarioparqueo").get({usuario:user.id})
         .then(function(res) {
           return res;
         }, function(err) {

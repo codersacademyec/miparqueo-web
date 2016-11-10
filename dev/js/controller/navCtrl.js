@@ -14,16 +14,21 @@ function navCtrl($scope, $rootScope, navService){
     };
 
     vm.buscarDisponibilidad = function () {
-      returnnavService.getParqueoUsuario($rootScope.user).then(function(res) {
-        vm.filter.pId = res.parqueo;
+      return navService.getParqueoUsuario($rootScope.user).then(function(res) {
+        vm.filter.pId = res.data[0].parqueo;
         vm.filter.hD =  new Date(vm.filter.hD);
         vm.filter.hH =  new Date(vm.filter.hH);
         navService.buscarDisponibilidad(vm.filter).then(function(data) {
           console.log(data);
-          vm.resultBusq = data;
-          $('#busqueda-dialog').modal('hide');
+          vm.filter.puesto = data;
+          $('#search').collapse("hide");
+          $('#searchPanel').collapse("show");
           $scope.$digest();
         });
       });
+    };
+
+    vm.reservar = function(){
+      
     };
 }
