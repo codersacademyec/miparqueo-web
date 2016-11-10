@@ -1,14 +1,3 @@
- $(function() {
-    $('.fecha').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        time: false
-    });
-    $('.hora').bootstrapMaterialDatePicker({
-      format : 'HH:mm',
-        date: false    
-    });
-});
-
 angular.module('MiParking', ['ui.router', 'chart.js', 'easypiechart'])
     .factory('AccountService', ["$q", function($q) {
         return {

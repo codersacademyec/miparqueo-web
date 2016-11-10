@@ -2,7 +2,8 @@ angular.module('MiParking').factory('navService', ['$rootScope',navService]);
 
 function navService(root) {
     var service = {
-        buscarDisponibilidad: buscarDisponibilidad
+        buscarDisponibilidad: buscarDisponibilidad,
+        getParqueoUsuario : getParqueoUsuario
     };
 
     return service;
@@ -15,6 +16,15 @@ function navService(root) {
           	console.error(err);
             return null;
         }); 
+    }
+
+    function getParqueoUsuario(user){
+        Stamplay.Object("usuarioparqueo").get(user.id)
+        .then(function(res) {
+          return res;
+        }, function(err) {
+            console.log(err);
+        }) 
     }
 
 }
