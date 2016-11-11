@@ -86,9 +86,9 @@
 			  		<tr ng-repeat="reserva in ctrl.reservas | orderBy : 'HoraDesde'" class="info" >
 			  			<td><span>{{reserva.puestoParqueo | uppercase }}</span></td>
 			  			<td><span>{{reserva.Placa | uppercase }}</span></td>
-			  			<td><span>$ {{reserva.Monto}}</span></td>
 			  			<td><span>{{ctrl.estadia(reserva.HoraDesde)}}</span></td>
 			  			<td><span>{{ctrl.estadia(reserva.HoraHasta)}}</span></td>
+			  			<td><span>$ {{reserva.Monto}}</span></td>
 			  		</tr>
 			  	</tbody>
 			</table>                

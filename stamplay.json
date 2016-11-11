@@ -1,0 +1,10 @@
+{
+  "appId": "miparqueo",
+  "apiKey": "6607120056d638d0b9056c8306942c5fa246e60502561ec32bde3a0d4cb4eb5b",
+  "public": "./",
+  "ignore": [
+    "stamplay.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

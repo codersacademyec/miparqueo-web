@@ -43,7 +43,7 @@
                 </select>
             </div>
             <div class="form-group collapse" id="search">
-                <button ng-click="ctrl.buscarDisponibilidad()" class="btn btn-success">Buscar</button>
+                <button ng-click="searchForm.$valid && ctrl.buscarDisponibilidad()" class="btn btn-success">Buscar</button>
             </div>
             <div class="form-group collapse" id="searchPanel">
               <div class="form-group">
