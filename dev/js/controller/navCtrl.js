@@ -10,13 +10,19 @@ function navCtrl($scope, $rootScope, navService){
     vm.validatePayphone = false;
     vm.validate = false;
 
+    visibility = function(bool){
+      $('#hd').prop('disabled',bool);
+      $('#hh').prop('disabled',bool);
+      $('#tv').prop('disabled',bool);
+      $('#search').collapse(!bool?"show":"hide");
+      $('#searchPanel').collapse(!bool?"hide":"show");
+    }
+
     vm.showDisponibilidad = function () {
       vm.filter = {};      
       vm.validatePayphone = false;
       vm.validate = false;
-      $('#hd').prop('disabled',false);
-      $('#hh').prop('disabled',false);
-      $('#tv').prop('disabled',false);
+      visibility(false);
       $('#busqueda-dialog').modal();
     };
 
@@ -29,11 +35,7 @@ function navCtrl($scope, $rootScope, navService){
             if(data){
               console.log(data);
               vm.filter.puesto = data;
-              $('#search').collapse("hide");
-              $('#searchPanel').collapse("show");
-              $('#hd').prop('disabled',true);
-              $('#hh').prop('disabled',true);
-              $('#tv').prop('disabled',true);
+              visibility(true);
               vm.validate = true;
               $scope.$digest();
             }
