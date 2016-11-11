@@ -16,9 +16,8 @@ function navCtrl($scope, $rootScope, navService){
     vm.buscarDisponibilidad = function () {
       return navService.getParqueoUsuario($rootScope.user).then(function(res) {
         vm.filter.pId = res.data[0].parqueo;
-        vm.filter.hD =  new Date(vm.filter.hD);
-        vm.filter.hH =  new Date(vm.filter.hH);
-        navService.buscarDisponibilidad(vm.filter).then(function(data) {
+        var params = {hD: new Date(vm.filter.hD), hH: new Date(vm.filter.hH), tV: vm.filter.tV, pId : vm.filter.pId};
+        navService.buscarDisponibilidad(params).then(function(data) {
           console.log(data);
           vm.filter.puesto = data;
           $('#search').collapse("hide");
@@ -27,6 +26,14 @@ function navCtrl($scope, $rootScope, navService){
         });
       });
     };
+
+    vm.cambiarModoPago = function(){
+      if(vm.filter.tP == '0'){
+        $('#pagoPanel').collapse("hide");
+      }else{
+        $('#pagoPanel').collapse("show");
+      }
+    }
 
     vm.reservar = function(){
       
