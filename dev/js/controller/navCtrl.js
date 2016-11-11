@@ -7,8 +7,10 @@ function navCtrl($scope, $rootScope, navService){
     $.material.init();
 
     vm.filter = {};
+    vm.reserva = {};
     vm.validatePayphone = false;
     vm.validate = false;
+    vm.montos = [];
 
     visibility = function(bool){
       $('#hd').prop('disabled',bool);
@@ -19,7 +21,8 @@ function navCtrl($scope, $rootScope, navService){
     }
 
     vm.showDisponibilidad = function () {
-      vm.filter = {};      
+      vm.filter = {};
+      vm.reserva = {};
       vm.validatePayphone = false;
       vm.validate = false;
       visibility(false);
@@ -27,23 +30,39 @@ function navCtrl($scope, $rootScope, navService){
     };
 
     vm.buscarDisponibilidad = function () {
-      //if($('#searchForm').$valid){
-        return navService.getParqueoUsuario($rootScope.user).then(function(res) {
+        navService.getParqueoUsuario($rootScope.user).then(function(res) {
           vm.filter.pId = res.data[0].parqueo;
-          var params = {hD: new Date(vm.filter.hD), hH: new Date(vm.filter.hH), tV: vm.filter.tV, pId : vm.filter.pId};
+          var params = {hD: new Date(vm.filter.hD), hH: new Date(vm.filter.hH), tV: vm.reserva.TipoVehiculo, pId : vm.filter.pId};
           navService.buscarDisponibilidad(params).then(function(data) {
             if(data){
               console.log(data);
-              vm.filter.puesto = data;
+              vm.reserva.Puesto = data;
               visibility(true);
               vm.validate = true;
+              vm.reserva.Monto = calcularMonto();
               $scope.$digest();
             }
+          }, function( err ){
+              console.error(err);
           });
         }, function( err ){
               console.error(err);
         });
-      //}
+    };
+
+    calcularMonto = function(){
+      navService.getParqueo(vm.filter.pId[0]).then(function(res){
+          vm.reserva.Parqueo = res.data[0]._id;
+          vm.montos = [parseFloat(res.data[0].ValorXHoraL), parseFloat(res.data[0].ValorXHoraP), parseFloat(res.data[0].ValorXHoraM)];
+          return (r.formatHora(vm.filter.hH) - r.formatHora(vm.filter.hD)) * vm.montos[vm.reserva.TipoVehiculo];
+      }, function(error){
+         console.log(error);
+      });
+    }
+
+    $rootScope.formatHora = function(hora) {
+      hora = hora.split(':');
+      return parseFloat(hora[0] + '.' + hora[1].replace('3', '5'));
     };
 
     vm.cambiarModoPago = function(){
@@ -54,9 +73,19 @@ function navCtrl($scope, $rootScope, navService){
         $('#pagoPanel').collapse("show");
         vm.validatePayphone = true;
       }
-    }
+    };
 
     vm.reservar = function(){
-      
+      vm.reserva.HoraDesde = new Date(vm.filter.hD);
+      vm.reserva.HoraHasta = new Date(vm.filter.hH);
+      vm.reserva.Estado = 'P'; //TODO VER FORMA DE PAGO CON CELULAR Y COMO SE VAN A MANEJAR LOS ESTADOS
+      vm.reserva.Usuario = $rootScope.user.id; // VER SI PAGA POR PAYPHONE (DE SER ASI SE PUEDE GUARDAR EL USUARIO DEL CLIENTE)
+      navService.reservar(vm.reserva).then(function(res) {
+        if(res){
+          addAlert();  
+        }
+      }, function( err ){
+          console.error(err);
+      });
     };
 }

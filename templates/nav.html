@@ -21,11 +21,10 @@
         </li>
       </ul>
       
-
       <div id="busqueda-dialog" class="modal fade clearfix">
         <div class="modal-content mfp-dialog">
         <h3>Buscar Disponibilidad</h3>
-        <form id="searchForm" class="dialog-form">
+        <form name="searchForm" class="dialog-form">
             <div class="form-group">
                 <label>Hora Desde (*)</label>
                 <input type="text" class="form-control hora" ng-model="ctrl.filter.hD" ng-required="true" id="hd">
@@ -36,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label>Tipo Vehiculo (*)</label>
-                <select class="form-control" ng-model="ctrl.filter.tV" ng-required="true" id="tv">
+                <select class="form-control" ng-model="ctrl.reserva.TipoVehiculo" ng-required="true" id="tv">
                   <option value="0">Liviano</option>
                   <option value="1">Pesado</option>
                   <option value="2">Moto</option>
@@ -48,11 +47,15 @@
             <div class="form-group collapse" id="searchPanel">
               <div class="form-group">
                 <label>Puesto Asignado</label>
-                <input type="text" class="form-control" ng-model="ctrl.filter.puesto" disabled="disabled">
+                <input type="text" class="form-control" ng-model="ctrl.reserva.puestoParqueo" disabled="disabled">
+              </div>
+              <div class="form-group">
+                <label>Monto</label>
+                <input type="text" class="form-control" ng-model="ctrl.reserva.Monto" disabled="disabled">
               </div>
               <div class="form-group">
                 <label>Placa (*)</label>
-                <input type="text" class="form-control" ng-required="ctrl.validate" ng-model="ctrl.filter.placa">
+                <input type="text" class="form-control" ng-required="ctrl.validate" ng-model="ctrl.reserva.Placa">
               </div>
               <div class="form-group">
                 <label>Tipo Pago (*)</label>
@@ -66,7 +69,7 @@
                   <input type="text" class="form-control" ng-required="ctrl.validatePayphone" ng-model="ctrl.filter.celular">
               </div>
               <div class="form-group">
-                <button ng-click="ctrl.reservar()" class="btn btn-success">Confirmar Reserva</button>
+                <button ng-click="searchForm.$valid && ctrl.reservar()" class="btn btn-success">Confirmar Reserva</button>
               </div>
             </div>
         </form>

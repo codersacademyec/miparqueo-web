@@ -31,11 +31,23 @@
             z-index: 9999999;
         }
     </style>
+
+    <script>
+        var alertId = 0;
+        function addAlert(){
+            var alert = '<div class="alert alert-success fade in alert_'+alertId+'" role="alert"> Reserva realizada con &eacute;xito.</div>';
+            setTimeout(function() {
+                $('.alert')[0].remove();
+            }, 3000);
+            $('.notContainer').append(alert);
+            alertId++;
+        }
+    </script>
 </head>
 <body>
 
     <div class="global-wrap">
-
+    	<div class="notContainer"></div>
 		<div class="row">
 			<div class="col-lg-12">
 				<span class="active"><h5>Estad&iacute;sticas de Reservas</h5></span>

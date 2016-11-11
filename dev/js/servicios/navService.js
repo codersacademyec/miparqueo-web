@@ -3,7 +3,9 @@ angular.module('MiParking').factory('navService', ['$rootScope',navService]);
 function navService(root) {
     var service = {
         buscarDisponibilidad: buscarDisponibilidad,
-        getParqueoUsuario : getParqueoUsuario
+        getParqueoUsuario : getParqueoUsuario,
+        reservar : reservar,
+        getParqueo : getParqueo
     };
 
     return service;
@@ -15,7 +17,7 @@ function navService(root) {
         }, function( err ){
           	console.error(err);
             return null;
-        }); 
+        })
     }
 
     function getParqueoUsuario(user){
@@ -24,7 +26,25 @@ function navService(root) {
           return res;
         }, function(err) {
             console.log(err);
-        }) 
+        })
+    }
+
+    function reservar(reserva){
+    	return Stamplay.Object("reservar").save(reserva)
+        .then(function(res) {
+          return res;
+        }, function(err) {
+            console.log(err);
+        })
+    }
+
+    function getParqueo(pId){
+    	return Stamplay.Object("parqueos").get({_id:pId})
+    	.then(function(res) {
+    		return res;
+      }, function( err ){
+          console.error(err);
+      })
     }
 
 }
