@@ -36,7 +36,7 @@ function navCtrl($scope, $rootScope, navService){
           navService.buscarDisponibilidad(params).then(function(data) {
             if(data){
               console.log(data);
-              vm.reserva.Puesto = data;
+              vm.reserva.puestoParqueo = data;
               visibility(true);
               vm.validate = true;
               vm.reserva.Monto = calcularMonto();

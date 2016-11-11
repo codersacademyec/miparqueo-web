@@ -42,6 +42,7 @@
                 </select>
             </div>
             <div class="form-group collapse" id="search">
+                <div class = "form-group" ng-if="!searchForm.$valid"><label style="font-size: 12px;">(*) Campos Obligatorios</label></div>
                 <button ng-click="searchForm.$valid && ctrl.buscarDisponibilidad()" class="btn btn-success">Buscar</button>
             </div>
             <div class="form-group collapse" id="searchPanel">
@@ -68,6 +69,7 @@
                   <label>Celular (*)</label>
                   <input type="text" class="form-control" ng-required="ctrl.validatePayphone" ng-model="ctrl.filter.celular">
               </div>
+              <div class = "form-group" ng-if="!searchForm.$valid"><label style="font-size: 12px;">(*) Campos Obligatorios</label></div>
               <div class="form-group">
                 <button ng-click="searchForm.$valid && ctrl.reservar()" class="btn btn-success">Confirmar Reserva</button>
               </div>
