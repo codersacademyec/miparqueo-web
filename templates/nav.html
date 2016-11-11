@@ -25,18 +25,18 @@
       <div id="busqueda-dialog" class="modal fade clearfix">
         <div class="modal-content mfp-dialog">
         <h3>Buscar Disponibilidad</h3>
-        <form class="dialog-form">
+        <form id="searchForm" class="dialog-form">
             <div class="form-group">
                 <label>Hora Desde</label>
-                <input type="text" class="form-control hora" ng-model="ctrl.filter.hD">
+                <input type="text" class="form-control hora" ng-model="ctrl.filter.hD" ng-required="true">
             </div>
             <div class="form-group">
                 <label>Hora Hasta</label>
-                <input type="text" class="form-control hora" ng-model="ctrl.filter.hH">
+                <input type="text" class="form-control hora" ng-model="ctrl.filter.hH" ng-required="true">
             </div>
             <div class="form-group">
                 <label>Tipo Vehiculo</label>
-                <select class="form-control" ng-model="ctrl.filter.tV" >
+                <select class="form-control" ng-model="ctrl.filter.tV">
                   <option value="0">Liviano</option>
                   <option value="1">Pesado</option>
                   <option value="2">Moto</option>
