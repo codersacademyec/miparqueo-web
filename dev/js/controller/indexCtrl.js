@@ -9,6 +9,7 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
 
   $scope.credenciales = {};
   vm.reservas = [];
+  vm.usuariosparqueo = [];
 
   $scope.percentRes = 65;
   $scope.percentDis = 35;
@@ -50,8 +51,13 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
           Stamplay.Object("usuarios").get({owner: $rootScope.user._id})
               .then(function(res) {
                   $rootScope.user.perfil = res.data[0];
-                  vm.buscarReservasDia();
-                  vm.estadisticasAnual();
+                  setRol();
+                  if($rootScope.user.perfil.rol == 'admin'){
+                    vm.buscarUsuariosParqueos();
+                  }else{
+                    vm.buscarReservasDia();
+                    vm.estadisticasAnual();
+                  }
               }, function(err) {
                   console.log(err);
               });
@@ -64,7 +70,21 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
   // login con Stamplay
   vm.login = function() {
       indexService.login(vm.credenciales);
+      setRol();
   };
+
+  // busca el tipo de rol del usuario logueado
+  setRol = function(){
+    Stamplay.User.getRoles().then(function(res) {
+        for (var i = res.data.length - 1; i >= 0; i--) {
+          if(res.data[i]._id == $rootScope.user.perfil.givenRole){
+            $rootScope.user.perfil.rol = res.data[i].name;
+          }
+        }
+      }, function(err) {
+        console.error(err)
+      })
+  }
 
   // obtiene todas las reserva del dia para el usuario logueado
   vm.buscarReservasDia = function(){
@@ -85,11 +105,42 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
     });
   };
 
+  // busca usuarios con rol parqueo
+  vm.buscarUsuariosParqueos = function(){
+    var codeblock = new Stamplay.Codeblock("usuariosparqueos");
+    codeblock.run({}).then(function (res) {
+        console.log(res);
+        vm.usuariosparqueo = res;
+        $scope.$digest();
+    }, function( err ){
+      console.error(err);
+    });
+  }
 
+  // elimina usuarios con rol parqueo
+  vm.eliminarUsuario = function(user){
+    indexService.deleteUser(user).then(function(data) {
+      vm.buscarUsuariosParqueos();
+      $scope.$digest();
+    });
+  }
+
+  // da formato de fecha hora
   vm.estadia = function(i) {
       var fecha = new Date(i);
       return fecha.getDate() + '/' + fecha.getMonth() + '/' + fecha.getFullYear() + " - " + fecha.getHours() + ':' + (fecha.getMinutes() == 0 ? '00' : '30');
   };
+
+
+  // FLAGS
+
+  $rootScope.esRolAdmin = function(){
+    return ($rootScope.user.perfil.rol == 'admin');
+  }
+
+  $rootScope.esRolParqueo = function(){
+    return ($rootScope.user.perfil.rol == 'parqueo');
+  }
 
   $('.hora').bootstrapMaterialDatePicker({format : 'DD/MM/YYYY HH:mm', date: false});
 }

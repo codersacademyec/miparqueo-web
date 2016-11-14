@@ -29,6 +29,7 @@ function navCtrl($scope, $rootScope, navService){
       $('#busqueda-dialog').modal();
     };
 
+    // busca disponibilidad para reserva para el parqueo actual
     vm.buscarDisponibilidad = function () {
         navService.getParqueoUsuario($rootScope.user).then(function(res) {
           vm.filter.pId = res.data[0].parqueo;
@@ -50,6 +51,7 @@ function navCtrl($scope, $rootScope, navService){
         });
     };
 
+    // calcula el monto del parqueo a reservar
     calcularMonto = function(){
       navService.getParqueo(vm.filter.pId[0]).then(function(res){
           vm.reserva.Parqueo = res.data[0]._id;
@@ -60,11 +62,14 @@ function navCtrl($scope, $rootScope, navService){
       });
     }
 
+    // formato hora
     $rootScope.formatHora = function(hora) {
       hora = hora.split(':');
       return parseFloat(hora[0] + '.' + hora[1].replace('3', '5'));
     };
 
+
+    // segun modo de pago, visibilidad en pantalla
     vm.cambiarModoPago = function(){
       if(vm.filter.tP == '0'){
         $('#pagoPanel').collapse("hide");
@@ -75,6 +80,7 @@ function navCtrl($scope, $rootScope, navService){
       }
     };
 
+    // reserva un parqueo
     vm.reservar = function(){
       vm.reserva.HoraDesde = new Date(vm.filter.hD);
       vm.reserva.HoraHasta = new Date(vm.filter.hH);
@@ -87,5 +93,10 @@ function navCtrl($scope, $rootScope, navService){
       }, function( err ){
           console.error(err);
       });
+    };
+
+    // Cancela una reserva
+    vm.cancelarReserva = function(reserva){
+
     };
 }

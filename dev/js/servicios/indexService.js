@@ -3,7 +3,8 @@ angular.module('MiParking').factory('indexService', ['$rootScope',indexService])
 function indexService(r) {
     var service = {
         buscarPorDia: getResPorDia,
-        login: login
+        login: login,
+        deleteUser : deleteUser
     };
 
     return service;
@@ -35,6 +36,18 @@ function indexService(r) {
         }else{
         	$('#login-dialog').modal();
         }
+    }
+
+    function deleteUser(user){
+        Stamplay.User.remove(user._id).then(function(res) {
+            Stamplay.Object("usuarioparqueo").remove({_id:user.perfil._id}).then(function(res) {
+                console.log(res);
+            }, function(err) {
+                console.log(err);
+            })
+        }, function(err) {
+          console.log(err);
+        })
     }
 
 }
