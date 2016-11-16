@@ -99,4 +99,11 @@ function navCtrl($scope, $rootScope, navService){
     vm.cancelarReserva = function(reserva){
 
     };
+
+
+    $rootScope.logout = function(){
+        var jwt = window.location.origin + "-jwt";
+        window.localStorage.removeItem(jwt);
+        $rootScope.user = false;
+    }
 }

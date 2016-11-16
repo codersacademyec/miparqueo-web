@@ -14,8 +14,8 @@ function indexService(r) {
         Stamplay.User.login(i)
         .then(function(res) {
           r.user = res;
-          $('#login-dialog').modal('hide');
-          return getResPorDia(res);
+          vm.setRol();
+          $('#login-dialog').modal('hide');        
         }, function(err) {
           console.log(err);
         })

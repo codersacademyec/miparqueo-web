@@ -51,13 +51,7 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
           Stamplay.Object("usuarios").get({owner: $rootScope.user._id})
               .then(function(res) {
                   $rootScope.user.perfil = res.data[0];
-                  setRol();
-                  if($rootScope.user.perfil.rol == 'admin'){
-                    vm.buscarUsuariosParqueos();
-                  }else{
-                    vm.buscarReservasDia();
-                    vm.estadisticasAnual();
-                  }
+                  vm.setRol();
               }, function(err) {
                   console.log(err);
               });
@@ -70,16 +64,21 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
   // login con Stamplay
   vm.login = function() {
       indexService.login(vm.credenciales);
-      setRol();
   };
 
   // busca el tipo de rol del usuario logueado
-  setRol = function(){
+  vm.setRol = function(){
     Stamplay.User.getRoles().then(function(res) {
         for (var i = res.data.length - 1; i >= 0; i--) {
-          if(res.data[i]._id == $rootScope.user.perfil.givenRole){
-            $rootScope.user.perfil.rol = res.data[i].name;
+          if(res.data[i]._id == $rootScope.user.givenRole){
+            $rootScope.user.rol = res.data[i].name;
           }
+        }
+        if($rootScope.user.rol == 'admin'){
+          vm.buscarUsuariosParqueos();
+        }else{
+          vm.buscarReservasDia();
+          vm.estadisticasAnual();
         }
       }, function(err) {
         console.error(err)
@@ -135,11 +134,19 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
   // FLAGS
 
   $rootScope.esRolAdmin = function(){
-    return ($rootScope.user.perfil.rol == 'admin');
+    if($rootScope.user){
+      return ($rootScope.user.rol == 'admin');
+    } else{
+      return false;
+    }
   }
 
   $rootScope.esRolParqueo = function(){
-    return ($rootScope.user.perfil.rol == 'parqueo');
+    if($rootScope.user){
+      return ($rootScope.user.rol == 'parqueo');
+    } else{
+      return false;
+    }
   }
 
   $('.hora').bootstrapMaterialDatePicker({format : 'DD/MM/YYYY HH:mm', date: false});
