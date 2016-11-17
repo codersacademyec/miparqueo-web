@@ -95,7 +95,7 @@ function navCtrl($scope, $rootScope, navService){
       });
     };
 
-    // Cancela una reserva
+    // TODO Cancela una reserva
     vm.cancelarReserva = function(reserva){
 
     };
@@ -105,5 +105,10 @@ function navCtrl($scope, $rootScope, navService){
         var jwt = window.location.origin + "-jwt";
         window.localStorage.removeItem(jwt);
         $rootScope.user = false;
+    }
+
+    // TODO permite al usuario de tipo admin, crear nuevos user de parqueo
+    vm.newUserParqueo = function(){
+
     }
 }

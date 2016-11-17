@@ -63,26 +63,26 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
 
   // login con Stamplay
   vm.login = function() {
-      indexService.login(vm.credenciales);
+      indexService.login(vm.credenciales).then(function(res){
+        getDatosRole();
+      });
   };
 
   // busca el tipo de rol del usuario logueado
   vm.setRol = function(){
-    Stamplay.User.getRoles().then(function(res) {
-        for (var i = res.data.length - 1; i >= 0; i--) {
-          if(res.data[i]._id == $rootScope.user.givenRole){
-            $rootScope.user.rol = res.data[i].name;
-          }
-        }
-        if($rootScope.user.rol == 'admin'){
-          vm.buscarUsuariosParqueos();
-        }else{
-          vm.buscarReservasDia();
-          vm.estadisticasAnual();
-        }
-      }, function(err) {
-        console.error(err)
-      })
+    indexService.setRol({}).then(function(res){
+        getDatosRole();
+    });
+  }
+
+  // obtiene la informacion del usuario segun el rol
+  getDatosRole = function(){
+    if($rootScope.user.rol == 'admin'){
+      vm.buscarUsuariosParqueos();
+    }else{
+      vm.buscarReservasDia();
+      vm.estadisticasAnual();
+    }
   }
 
   // obtiene todas las reserva del dia para el usuario logueado
@@ -99,6 +99,7 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
     var codeblock = new Stamplay.Codeblock("reservasanual");
     codeblock.run({}).then(function (response) {
         $scope.data=[response];
+        $scope.$digest();
     }, function( err ){
       console.error(err);
     });
@@ -120,7 +121,6 @@ function indexCtrl($scope, $rootScope, indexService, AccountService){
   vm.eliminarUsuario = function(user){
     indexService.deleteUser(user).then(function(data) {
       vm.buscarUsuariosParqueos();
-      $scope.$digest();
     });
   }
 

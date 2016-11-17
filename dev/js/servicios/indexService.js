@@ -4,7 +4,8 @@ function indexService(r) {
     var service = {
         buscarPorDia: getResPorDia,
         login: login,
-        deleteUser : deleteUser
+        deleteUser : deleteUser,
+        setRol : setRol
     };
 
     return service;
@@ -14,7 +15,7 @@ function indexService(r) {
         Stamplay.User.login(i)
         .then(function(res) {
           r.user = res;
-          vm.setRol();
+          setRol();
           $('#login-dialog').modal('hide');        
         }, function(err) {
           console.log(err);
@@ -48,6 +49,18 @@ function indexService(r) {
         }, function(err) {
           console.log(err);
         })
+    }
+
+    function setRol(){
+        Stamplay.User.getRoles().then(function(res) {
+        for (var i = res.data.length - 1; i >= 0; i--) {
+          if(res.data[i]._id == r.user.givenRole){
+            r.user.rol = res.data[i].name;
+          }
+        }
+      }, function(err) {
+        console.error(err);
+      })
     }
 
 }

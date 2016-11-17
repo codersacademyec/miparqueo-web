@@ -16,8 +16,8 @@
           <ul class="dropdown-menu">
             <li><a href="#" ng-click="ctrl.showDisponibilidad()"  ng-if="esRolParqueo()">Buscar Disponibilidad</a></li>
             <li><a href="#" ng-click="ctrl.newUserParqueo()" ng-if="esRolAdmin()">Nuevo Usuario de Parqueo</a></li>
-            <li class="divider"></li>
-            <li><a href="#" ng-click="logout()">Cerrar Sesi&oacute;n</a></li>
+            <li class="divider" ng-if="user"></li>
+            <li><a href="#" ng-click="logout()" ng-if="user">Cerrar Sesi&oacute;n</a></li>
           </ul>
         </li>
       </ul>
