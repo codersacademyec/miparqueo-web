@@ -11,6 +11,7 @@ function navCtrl($scope, $rootScope, navService){
     vm.validatePayphone = false;
     vm.validate = false;
     vm.montos = [];
+    vm.newusuario = {};
 
     visibility = function(bool){
       $('#hd').prop('disabled',bool);
@@ -100,15 +101,16 @@ function navCtrl($scope, $rootScope, navService){
 
     };
 
+    
+    // confirma alta de usuario de tipo parqueo
+    vm.confirmNewUser = function(){
+      
+      $('user-dialog').modal('hide');
+    }
 
     $rootScope.logout = function(){
         var jwt = window.location.origin + "-jwt";
         window.localStorage.removeItem(jwt);
         $rootScope.user = false;
-    }
-
-    // TODO permite al usuario de tipo admin, crear nuevos user de parqueo
-    vm.newUserParqueo = function(){
-
     }
 }

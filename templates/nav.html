@@ -11,13 +11,13 @@
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Administrar
+          <a href="#" data-target="#" style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown">Administrar
             <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#" ng-click="ctrl.showDisponibilidad()"  ng-if="esRolParqueo()">Buscar Disponibilidad</a></li>
-            <li><a href="#" ng-click="ctrl.newUserParqueo()" ng-if="esRolAdmin()">Nuevo Usuario de Parqueo</a></li>
+            <li><a href="#" style="cursor:pointer;" ng-click="ctrl.showDisponibilidad()"  ng-if="esRolParqueo()">Buscar Disponibilidad</a></li>
+            <li><a ng-if="esRolAdmin()" style="cursor:pointer;" data-toggle="modal" data-target="#user-dialog">Nuevo Usuario de Parqueo</a></li>
             <li class="divider" ng-if="user"></li>
-            <li><a href="#" ng-click="logout()" ng-if="user">Cerrar Sesi&oacute;n</a></li>
+            <li><a href="#" style="cursor:pointer;" ng-click="logout()" ng-if="user">Cerrar Sesi&oacute;n</a></li>
           </ul>
         </li>
       </ul>
@@ -75,6 +75,26 @@
               <div class="form-group">
                 <button ng-click="searchForm.$valid && ctrl.reservar()" class="btn btn-success">Confirmar Reserva</button>
               </div>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <!-- ALTA DE USUARIOS DE PARQUEO-->
+    <div id="user-dialog" class="modal fade clearfix">
+        <div class="modal-content mfp-dialog">
+        <h3>Alta Usuario de Parqueo</h3>
+        <form class="dialog-form">
+            <div class="form-group">
+                <label>E-mail Usuario</label>
+                <input type="text" placeholder="email@dominio.com" class="form-control" ng-model="ctrl.newusuario.email">
+            </div>
+            <div class="form-group">
+                <label>Clave Usuario</label>
+                <input type="password" placeholder="Mi clave secreta" class="form-control" ng-model="ctrl.newusuario.password">
+            </div>
+            <div class="form-group">
+                <button ng-click="ctrl.confirmNewUser()" class="btn btn-success">Confirmar</button>
             </div>
         </form>
         </div>
