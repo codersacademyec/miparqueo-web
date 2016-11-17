@@ -37,6 +37,7 @@ function loginCtrl($scope, $rootScope, loginService, AccountService){
 
   // obtiene la informacion del usuario segun el rol
   getDatosRole = function(){
+    $scope.$apply();
     if($rootScope.user.rol == 'admin'){
       vm.buscarUsuariosParqueos();
     }else{
