@@ -1,51 +1,3 @@
-<!DOCTYPE HTML>
-<html ng-app="MiParking">
-
-<head>
-
-	<!-- meta info -->
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <meta name="keywords" content="U4innovation, Sebastian Montenegro" />
-    <meta name="description" content="MiCupon Ecuador">
-    <meta name="author" content="Sebastian Montenegro">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
-    <!-- Bootstrap styles -->
-    <link rel="stylesheet" href="css/boostrap.css">
-    <!-- Font Awesome styles (icons) -->
-    <link rel="stylesheet" href="css/font_awesome.css">
-    <!-- Main Template styles -->
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- IE 8 Fallback -->
-    <!--[if lt IE 9]>
-		<link rel="stylesheet" type="text/css" href="css/ie.css" />
-	<![endif]-->
-
-    <style>
-        .notContainer{
-            position: fixed;
-            top: 5px;
-            right: 5px;
-            z-index: 9999999;
-        }
-    </style>
-
-    <script>
-        var alertId = 0;
-        function addAlert(){
-            var alert = '<div class="alert alert-success fade in alert_'+alertId+'" role="alert"> Reserva realizada con &eacute;xito.</div>';
-            setTimeout(function() {
-                $('.alert')[0].remove();
-            }, 3000);
-            $('.notContainer').append(alert);
-            alertId++;
-        }
-    </script>
-</head>
-<body>
-
     <div class="global-wrap" ng-if="esRolParqueo()">
     	<div class="notContainer"></div>
 		<div class="row">
@@ -121,36 +73,4 @@
 				</table>     
 			</div>           
        </div>		
-	</div>
-
-
-	<!-- LOGIN REGISTER LINKS CONTENT -->
-		<div id="login-dialog" class="modal fade clearfix">
-		    <div class="modal-content mfp-dialog">
-		    <h3>Iniciar Sesi&oacute;n</h3>
-		    <form class="dialog-form">
-		        <div class="form-group">
-		            <label>E-mail</label>
-		            <input type="text" placeholder="email@dominio.com" class="form-control" ng-model="ctrl.credenciales.email">
-		        </div>
-		        <div class="form-group">
-		            <label>Clave</label>
-		            <input type="password" placeholder="Mi clave secreta" class="form-control" ng-model="ctrl.credenciales.password">
-		        </div>
-		        <div class="checkbox">
-		            <label>
-		                <input type="checkbox"> Recordarme
-		            </label>
-		        </div>
-		        <div class="form-group">
-		            <button ng-click="ctrl.login()" class="btn btn-success">Iniciar Sesi&oacute;n</button>
-		        </div>
-		    </form>
-		    <ul class="dialog-alt-links">
-		        <li><a class="popup-text" style="cursor:pointer;" data-toggle="modal" data-target="#password-recover-dialog" 
-		            data-effect="mfp-zoom-out" data-dismiss="modal">Olvid&eacute; mi clave</a>
-		        </li>
-		    </ul>
-		    </div>
-		</div>
-</body>
+	</div>	

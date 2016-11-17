@@ -1,7 +1,8 @@
 {
     "secciones": [
         "index",
-        "nav"
+        "nav",
+        "login"
     ],
     "core": [
     	"main",

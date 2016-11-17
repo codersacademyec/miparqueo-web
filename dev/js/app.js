@@ -25,6 +25,10 @@ angular.module('MiParking', ['ui.router', 'chart.js', 'easypiechart'])
         sticky: true,
         dsr: true,
         views: {
+          'loginView': {
+            templateUrl: 'templates/login.html',
+            controller: 'loginCtrl as ctrl'
+          },
           'navView': {
             templateUrl: 'templates/nav.html',
             controller: 'navCtrl as ctrl'

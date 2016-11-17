@@ -43,8 +43,8 @@
 	</style>
 </head>
 <body>
-<div ui-view="loginView"></div>
-<div ui-view="navView"></div>
-<div ui-view="contentView" class="container"></div>
+<div ui-view="loginView" class="container" ng-if="!user"></div>
+<div ui-view="navView" ng-if="user"></div>
+<div ui-view="contentView" class="container" ng-if="user"></div>
 </body>
 </html>
