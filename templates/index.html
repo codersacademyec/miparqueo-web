@@ -1,3 +1,58 @@
+<!DOCTYPE HTML>
+<html ng-app="MiParking">
+
+<head>
+
+	<!-- meta info -->
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="keywords" content="U4innovation" />
+    <meta name="description" content="MiParking Ecuador">
+    <meta name="author" content="U4innovation">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" href="css/boostrap.css">
+    <!-- Font Awesome styles (icons) -->
+    <link rel="stylesheet" href="css/font_awesome.css">
+
+    <!-- IE 8 Fallback -->
+    <!--[if lt IE 9]>
+		<link rel="stylesheet" type="text/css" href="css/ie.css" />
+	<![endif]-->
+
+    <style>
+        .notContainer{
+            position: fixed;
+            top: 5px;
+            right: 5px;
+            z-index: 9999999;
+        }
+        .mfp-dialog {
+		  background: #fff;
+		  padding: 20px 30px;
+		  text-align: left;
+		  max-width: 400px;
+		  margin: 40px auto;
+		  position: relative;
+		  -webkit-border-radius: 5px;
+		  border-radius: 5px;
+		}
+    </style>
+
+    <script>
+        var alertId = 0;
+        function addAlert(message){
+            var alert = '<div class="alert alert-success fade in alert_'+alertId+'" role="alert"> '+message+'</div>';
+            setTimeout(function() {
+                $('.alert')[0].remove();
+            }, 3000);
+            $('.notContainer').append(alert);
+            alertId++;
+        }
+    </script>
+</head>
+<body>
+
     <div class="global-wrap" ng-if="esRolParqueo()">
     	<div class="notContainer"></div>
 		<div class="row">
@@ -37,7 +92,7 @@
 					  	</tr>
 				  	</thead>
 				  	<tbody>
-				  		<tr ng-repeat="reserva in ctrl.reservas | orderBy : 'HoraDesde'">
+				  		<tr ng-repeat="reserva in reservas | orderBy : 'HoraDesde'">
 				  			<td><span>{{reserva.puestoParqueo | uppercase }}</span></td>
 				  			<td><span>{{reserva.Placa | uppercase }}</span></td>
 				  			<td><span>{{ctrl.estadia(reserva.HoraDesde)}}</span></td>
@@ -64,7 +119,7 @@
 					  	</tr>
 				  	</thead>
 				  	<tbody>
-				  		<tr ng-repeat="usuario in ctrl.usuariosparqueo | orderBy : 'displayName'">
+				  		<tr ng-repeat="usuario in usuariosparqueo | orderBy : 'displayName'">
 				  			<td><span>{{usuario.displayName | uppercase }}</span></td>
 				  			<td><span>{{usuario.email | uppercase }}</span></td>
 				  			<td><button ng-click="ctrl.eliminarUsuario(usuario)" class="btn btn-warning">Eliminar</button></td>
@@ -74,3 +129,5 @@
 			</div>           
        </div>		
 	</div>	
+</body>
+</html>

@@ -2,6 +2,7 @@ angular.module('MiParking').factory('loginService', ['$rootScope',loginService])
 
 function loginService(r) {
     var service = {
+        buscarPorDia: getResPorDia,
         login: login,
         setRol : setRol
     };
@@ -18,6 +19,7 @@ function loginService(r) {
           console.log(err);
         });
     }
+    
     function setRol(){
         return Stamplay.User.getRoles().then(function(res) {
         for (var i = res.data.length - 1; i >= 0; i--) {
@@ -29,6 +31,24 @@ function loginService(r) {
         console.error(err);
       });
     }
+
+    // todas las reservas del dia
+    function getResPorDia(user){
+        if(user){
+        var data = {usuario: user};
+        
+            var codeblock = new Stamplay.Codeblock("consultarreservas");
+            return codeblock.run(data).then(function (response) {
+                return response;
+            }, function( err ){
+              console.error(err);
+                return null;
+            });
+        }else{
+          $('#login-dialog').modal();
+        }
+    }
+
    AccountService.currentUser()
   .then(function(user) {
       if (user || $rootScope.user) {

@@ -89,7 +89,7 @@ function navCtrl($scope, $rootScope, navService){
       vm.reserva.Usuario = $rootScope.user.id; // VER SI PAGA POR PAYPHONE (DE SER ASI SE PUEDE GUARDAR EL USUARIO DEL CLIENTE)
       navService.reservar(vm.reserva).then(function(res) {
         if(res){
-          addAlert();  
+          addAlert('La reserva se ha registrado de manera exitosa.');  
         }
       }, function( err ){
           console.error(err);
@@ -101,7 +101,7 @@ function navCtrl($scope, $rootScope, navService){
 
     };
 
-    
+
     // confirma alta de usuario de tipo parqueo
     vm.confirmNewUser = function(){
       

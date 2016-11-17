@@ -14,91 +14,100 @@
           <a href="#" data-target="#" style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown">Administrar
             <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#" style="cursor:pointer;" ng-click="ctrl.showDisponibilidad()"  ng-if="esRolParqueo()">Buscar Disponibilidad</a></li>
-            <li><a ng-if="esRolAdmin()" style="cursor:pointer;" data-toggle="modal" data-target="#user-dialog">Nuevo Usuario de Parqueo</a></li>
+            <li ng-if="esRolParqueo()">
+            <a class="popup-text" style="cursor:pointer;" data-toggle="modal" ng-click="ctrl.showDisponibilidad()">
+            Buscar Disponibilidad</a></li>
+            
+            <li ng-if="esRolAdmin()">
+            <a class="popup-text" style="cursor:pointer;" data-toggle="modal" data-target="#user-dialog">
+            Nuevo Usuario de Parqueo</a></li>
+            
             <li class="divider" ng-if="user"></li>
+            
             <li><a href="#" style="cursor:pointer;" ng-click="logout()" ng-if="user">Cerrar Sesi&oacute;n</a></li>
           </ul>
         </li>
       </ul>
 
-      
-      <div id="busqueda-dialog" class="modal fade clearfix">
-        <div class="modal-content mfp-dialog">
-        <h3>Buscar Disponibilidad</h3>
-        <form name="searchForm" class="dialog-form">
-            <div class="form-group">
-                <label>Hora Desde (*)</label>
-                <input type="text" class="form-control hora" ng-model="ctrl.filter.hD" ng-required="true" id="hd">
-            </div>
-            <div class="form-group">
-                <label>Hora Hasta (*)</label>
-                <input type="text" class="form-control hora" ng-model="ctrl.filter.hH" ng-required="true" id="hh">
-            </div>
-            <div class="form-group">
-                <label>Tipo Vehiculo (*)</label>
-                <select class="form-control" ng-model="ctrl.reserva.TipoVehiculo" ng-required="true" id="tv">
-                  <option value="0">Liviano</option>
-                  <option value="1">Pesado</option>
-                  <option value="2">Moto</option>
-                </select>
-            </div>
-            <div class="form-group collapse" id="search">
+      <div class="global-wrap">
+
+        <div id="busqueda-dialog" class="modal fade clearfix">
+          <div class="modal-content mfp-dialog">
+          <h3>Buscar Disponibilidad</h3>
+          <form name="searchForm" class="dialog-form">
+              <div class="form-group">
+                  <label>Hora Desde (*)</label>
+                  <input type="text" class="form-control hora" ng-model="ctrl.filter.hD" ng-required="true" id="hd">
+              </div>
+              <div class="form-group">
+                  <label>Hora Hasta (*)</label>
+                  <input type="text" class="form-control hora" ng-model="ctrl.filter.hH" ng-required="true" id="hh">
+              </div>
+              <div class="form-group">
+                  <label>Tipo Vehiculo (*)</label>
+                  <select class="form-control" ng-model="ctrl.reserva.TipoVehiculo" ng-required="true" id="tv">
+                    <option value="0">Liviano</option>
+                    <option value="1">Pesado</option>
+                    <option value="2">Moto</option>
+                  </select>
+              </div>
+              <div class="form-group collapse" id="search">
+                  <div class = "form-group" ng-if="!searchForm.$valid"><label style="font-size: 12px;">(*) Campos Obligatorios</label></div>
+                  <button ng-click="searchForm.$valid && ctrl.buscarDisponibilidad()" class="btn btn-success">Buscar</button>
+              </div>
+              <div class="form-group collapse" id="searchPanel">
+                <div class="form-group">
+                  <label>Puesto Asignado</label>
+                  <input type="text" class="form-control" ng-model="ctrl.reserva.puestoParqueo" disabled="disabled">
+                </div>
+                <div class="form-group">
+                  <label>Monto</label>
+                  <input type="text" class="form-control" ng-model="ctrl.reserva.Monto" disabled="disabled">
+                </div>
+                <div class="form-group">
+                  <label>Placa (*)</label>
+                  <input type="text" class="form-control" ng-required="ctrl.validate" ng-model="ctrl.reserva.Placa">
+                </div>
+                <div class="form-group">
+                  <label>Tipo Pago (*)</label>
+                  <select class="form-control" ng-model="ctrl.filter.tP" ng-required="ctrl.validate" ng-change="ctrl.cambiarModoPago()">
+                    <option value="0">Efectivo</option>
+                    <option value="1">Payphone</option>
+                  </select>
+                </div>
+                <div class="form-group collapse" id="pagoPanel">
+                    <label>Celular (*)</label>
+                    <input type="text" class="form-control" ng-required="ctrl.validatePayphone" ng-model="ctrl.filter.celular">
+                </div>
                 <div class = "form-group" ng-if="!searchForm.$valid"><label style="font-size: 12px;">(*) Campos Obligatorios</label></div>
-                <button ng-click="searchForm.$valid && ctrl.buscarDisponibilidad()" class="btn btn-success">Buscar</button>
-            </div>
-            <div class="form-group collapse" id="searchPanel">
-              <div class="form-group">
-                <label>Puesto Asignado</label>
-                <input type="text" class="form-control" ng-model="ctrl.reserva.puestoParqueo" disabled="disabled">
+                <div class="form-group">
+                  <button ng-click="searchForm.$valid && ctrl.reservar()" class="btn btn-success">Confirmar Reserva</button>
+                </div>
               </div>
-              <div class="form-group">
-                <label>Monto</label>
-                <input type="text" class="form-control" ng-model="ctrl.reserva.Monto" disabled="disabled">
-              </div>
-              <div class="form-group">
-                <label>Placa (*)</label>
-                <input type="text" class="form-control" ng-required="ctrl.validate" ng-model="ctrl.reserva.Placa">
-              </div>
-              <div class="form-group">
-                <label>Tipo Pago (*)</label>
-                <select class="form-control" ng-model="ctrl.filter.tP" ng-required="ctrl.validate" ng-change="ctrl.cambiarModoPago()">
-                  <option value="0">Efectivo</option>
-                  <option value="1">Payphone</option>
-                </select>
-              </div>
-              <div class="form-group collapse" id="pagoPanel">
-                  <label>Celular (*)</label>
-                  <input type="text" class="form-control" ng-required="ctrl.validatePayphone" ng-model="ctrl.filter.celular">
-              </div>
-              <div class = "form-group" ng-if="!searchForm.$valid"><label style="font-size: 12px;">(*) Campos Obligatorios</label></div>
-              <div class="form-group">
-                <button ng-click="searchForm.$valid && ctrl.reservar()" class="btn btn-success">Confirmar Reserva</button>
-              </div>
-            </div>
-        </form>
-        </div>
-    </div>
+          </form>
+          </div>
+      </div>
 
-    <!-- ALTA DE USUARIOS DE PARQUEO-->
-    <div id="user-dialog" class="modal fade clearfix">
-        <div class="modal-content mfp-dialog">
-        <h3>Alta Usuario de Parqueo</h3>
-        <form class="dialog-form">
-            <div class="form-group">
-                <label>E-mail Usuario</label>
-                <input type="text" placeholder="email@dominio.com" class="form-control" ng-model="ctrl.newusuario.email">
-            </div>
-            <div class="form-group">
-                <label>Clave Usuario</label>
-                <input type="password" placeholder="Mi clave secreta" class="form-control" ng-model="ctrl.newusuario.password">
-            </div>
-            <div class="form-group">
-                <button ng-click="ctrl.confirmNewUser()" class="btn btn-success">Confirmar</button>
-            </div>
-        </form>
-        </div>
-    </div>
+      <!-- ALTA DE USUARIOS DE PARQUEO-->
+      <div id="user-dialog" class="modal fade clearfix">
+          <div class="modal-content mfp-dialog">
+          <h3><label>Alta Usuario de Parqueo</label></h3>
+          <form class="dialog-form">
+              <div class="form-group">
+                  <label>E-mail Usuario</label>
+                  <input type="text" placeholder="email@dominio.com" class="form-control" ng-model="ctrl.newusuario.email">
+              </div>
+              <div class="form-group">
+                  <label>Clave Usuario</label>
+                  <input type="password" placeholder="Mi clave secreta" class="form-control" ng-model="ctrl.newusuario.password">
+              </div>
+              <div class="form-group">
+                  <button ng-click="ctrl.confirmNewUser()" class="btn btn-success">Confirmar</button>
+              </div>
+          </form>
+          </div>
+      </div>
 
+    </div>
   </div>
 </div>

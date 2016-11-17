@@ -25,6 +25,7 @@ function loginCtrl($scope, $rootScope, loginService, AccountService){
   vm.login = function() {
       loginService.login(vm.credenciales).then(function(res){
         getDatosRole();
+        $rootScope.$digest();
       });
   };
 
@@ -32,6 +33,7 @@ function loginCtrl($scope, $rootScope, loginService, AccountService){
   vm.setRol = function(){
     loginService.setRol().then(function(res){
         getDatosRole();
+        $rootScope.$digest();
     });
   };
 
@@ -45,4 +47,37 @@ function loginCtrl($scope, $rootScope, loginService, AccountService){
       vm.estadisticasAnual();
     }
   };
+
+// obtiene todas las reserva del dia para el usuario logueado
+  vm.buscarReservasDia = function(){
+    loginService.buscarPorDia($rootScope.user).then(function(data) {
+      console.log(data);
+      $rootScope.reservas = data;
+      $scope.$digest();
+    });
+  };
+
+  // busca estadísticas del año actual
+  vm.estadisticasAnual = function(){
+    var codeblock = new Stamplay.Codeblock("reservasanual");
+    codeblock.run({}).then(function (response) {
+        $scope.data=[response];
+        $scope.$digest();
+    }, function( err ){
+      console.error(err);
+    });
+  };
+
+  // busca usuarios con rol parqueo
+  vm.buscarUsuariosParqueos = function(){
+    var codeblock = new Stamplay.Codeblock("usuariosparqueos");
+    codeblock.run({}).then(function (res) {
+        console.log(res);
+        $rootScope.usuariosparqueo = res;
+        $scope.$digest();
+    }, function( err ){
+      console.error(err);
+    });
+  }
+
 }
