@@ -118,4 +118,8 @@ function navCtrl($scope, $rootScope, navService){
         window.localStorage.removeItem(jwt);
         $rootScope.user = false;
     }
+
+    vm.clearUserDialog = function(){
+      vm.newusuario = {};
+    }
 }

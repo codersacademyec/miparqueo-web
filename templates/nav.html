@@ -19,7 +19,7 @@
             Buscar Disponibilidad</a></li>
             
             <li ng-if="esRolAdmin()">
-            <a class="popup-text" style="cursor:pointer;" data-toggle="modal" data-target="#user-dialog">
+            <a class="popup-text" style="cursor:pointer;" data-toggle="modal" data-target="#user-dialog" ng-click="ctrl.clearUserDialog()">
             Nuevo Usuario de Parqueo</a></li>
             
             <li class="divider" ng-if="user"></li>
