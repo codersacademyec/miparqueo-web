@@ -53,7 +53,7 @@ function loginCtrl($scope, $rootScope, loginService, AccountService){
     loginService.buscarPorDia($rootScope.user).then(function(data) {
       console.log(data);
       $rootScope.reservas = data;
-      $scope.$digest();
+      $rootScope.$digest();
     });
   };
 
@@ -74,7 +74,7 @@ function loginCtrl($scope, $rootScope, loginService, AccountService){
     codeblock.run({}).then(function (res) {
         console.log(res);
         $rootScope.usuariosparqueo = res;
-        $scope.$digest();
+        $rootScope.$digest();
     }, function( err ){
       console.error(err);
     });

@@ -104,7 +104,12 @@ function navCtrl($scope, $rootScope, navService){
 
     // confirma alta de usuario de tipo parqueo
     vm.confirmNewUser = function(){
-      
+      navService.altaUserParqueo(vm.newusuario).then(function(res) {
+        addAlert('Usuario registrado con éxito.');  
+      }, function( err ){
+          console.error(err);
+      });
+
       $('user-dialog').modal('hide');
     }
 

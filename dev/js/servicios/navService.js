@@ -5,7 +5,8 @@ function navService(root) {
         buscarDisponibilidad: buscarDisponibilidad,
         getParqueoUsuario : getParqueoUsuario,
         reservar : reservar,
-        getParqueo : getParqueo
+        getParqueo : getParqueo,
+        altaUserParqueo : altaUserParqueo
     };
 
     return service;
@@ -47,4 +48,16 @@ function navService(root) {
       })
     }
 
+    function altaUserParqueo(newusuario){
+		return Stamplay.User.signup(newusuario).then(function(res) {
+			Stamplay.Object("usuarioparqueo").save(newusuario)
+	        .then(function(data) {
+	          return "OK";
+	        }, function(error) {
+	            console.log(error);
+	        })
+      	}, function(err) {
+        	console.log(err);
+      	})
+    }
 }

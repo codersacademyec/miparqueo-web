@@ -92,17 +92,29 @@
       <div id="user-dialog" class="modal fade clearfix">
           <div class="modal-content mfp-dialog">
           <h3><label>Alta Usuario de Parqueo</label></h3>
-          <form class="dialog-form">
+          <form class="dialog-form" name="dialogform">
               <div class="form-group">
                   <label>E-mail Usuario</label>
-                  <input type="text" placeholder="email@dominio.com" class="form-control" ng-model="ctrl.newusuario.email">
+                  <input type="text" placeholder="email@dominio.com" class="form-control" ng-model="ctrl.newusuario.email" ng-required="true">
               </div>
               <div class="form-group">
                   <label>Clave Usuario</label>
-                  <input type="password" placeholder="Mi clave secreta" class="form-control" ng-model="ctrl.newusuario.password">
+                  <input type="password" placeholder="Mi clave secreta" class="form-control" ng-model="ctrl.newusuario.password" ng-required="true">
               </div>
               <div class="form-group">
-                  <button ng-click="ctrl.confirmNewUser()" class="btn btn-success">Confirmar</button>
+                  <label>Nombre del Establecimiento</label>
+                  <input type="text" placeholder="AutoParking" class="form-control" ng-model="ctrl.newusuario.nombre" ng-required="true">
+              </div>
+              <div class="form-group">
+                  <label>Domicilio del Establecimiento</label>
+                  <input type="text" placeholder="Av. Gaona 1430" class="form-control" ng-model="ctrl.newusuario.direccion" ng-required="true">
+              </div>
+              <div class="form-group">
+                  <label>Celular del Establecimiento</label>
+                  <input type="text" placeholder="1544445555" class="form-control" ng-model="ctrl.newusuario.celular" ng-required="true">
+              </div>
+              <div class="form-group">
+                  <button ng-click="dialogform.$valid && ctrl.confirmNewUser()" class="btn btn-success">Confirmar</button>
               </div>
           </form>
           </div>
